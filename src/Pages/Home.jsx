@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
+import styled from 'styled-components'
 // import { MovieCard } from '../Components/MovieCard'
 
 const apiKey = '1126aa859065d4eba48bcfccb414407a'
+
+const imageBase = 'https://image.tmdb.org/t/p/w1280'
 
 export const Home = () => {
   const [movies, setMovies] = useState([])
@@ -21,21 +24,58 @@ export const Home = () => {
   }, [])
 
   return (
-    <section className='movies'>
+    <StyledMovies className='movies'>
       {movies.map(movie => (
-        <div>
-          <Link to={`/Movie/${movie.id}`}>{movie.title}</Link>
-          <p key={movie.date}>{movie.release_date}</p>
-          {/* <img key={movie.id}>{movie.poster_path}</img> */}
-        </div>
+        <Link to={`/Movie/${movie.id}`}>
+          <StyledDiv style={{
+            backgroundImage: `url(${imageBase}${movie.poster_path})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}>
+            <StyledText>
+              <h1>{movie.title}</h1>
+              <p key={movie.date}>Released {movie.release_date}</p>
+            </StyledText>
+          </StyledDiv>
+        </Link>
       ))
       }
-    </section >
+    </StyledMovies >
   )
 }
 
 export default Home
 
-// Prepp för image
-// https://api.themoviedb.org/3/configuration?api_key=1126aa859065d4eba48bcfccb414407a
+const StyledMovies = styled.section`
+  display: flex;
+  flex-wrap: wrap;
+  `
 
+const StyledDiv = styled.div`
+    width: 220px;
+    height: 330px;
+    position: relative;
+
+  &:hover {
+    
+    /* Show the text overlay when hovering parent */
+    div {
+      opacity: 1;
+      background: rgba(0,0,0,0.6);  /* semi-transparent overlay */
+    }
+  }
+`
+const StyledText = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  color: white;
+  opacity: 0;                   /* hidden by default */
+  transition: opacity 0.25s ease;
+`
