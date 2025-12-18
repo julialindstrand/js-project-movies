@@ -20,7 +20,7 @@ export const Movie = () => {
       const OneMovieData = await response.json()
       setMovie(OneMovieData)
 
-      console.log('a movie', OneMovieData)
+      // console.log('a movie', OneMovieData)
 
     }
 

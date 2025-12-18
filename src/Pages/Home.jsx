@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import styled from 'styled-components'
-// import { MovieCard } from '../Components/MovieCard'
 
 const apiKey = '1126aa859065d4eba48bcfccb414407a'
-
-const imageBase = 'https://image.tmdb.org/t/p/w1280'
 
 export const Home = () => {
   const [movies, setMovies] = useState([])
@@ -24,58 +21,64 @@ export const Home = () => {
   }, [])
 
   return (
-    <StyledMovies className='movies'>
-      {movies.map(movie => (
-        <Link to={`/Movie/${movie.id}`}>
-          <StyledDiv style={{
-            backgroundImage: `url(${imageBase}${movie.poster_path})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}>
-            <StyledText>
-              <h1>{movie.title}</h1>
-              <p key={movie.date}>Released {movie.release_date}</p>
-            </StyledText>
-          </StyledDiv>
-        </Link>
-      ))
-      }
-    </StyledMovies >
+    <MoviesGrid>
+      {movies.map((movie) => (
+        <MovieCard key={movie.id}>
+          <Link to={`/movie/${movie.id}`}>
+            <ImageWrapper>
+              <Poster
+                src={`https://image.tmdb.org/t/p/w780${movie.poster_path}`}
+                alt={movie.title}
+              />
+              <Overlay>
+                <h1>{movie.title}</h1>
+                <p>Released {movie.release_date}</p>
+              </Overlay>
+            </ImageWrapper>
+          </Link>
+        </MovieCard>
+      ))}
+    </MoviesGrid>
   )
 }
 
 export default Home
 
-const StyledMovies = styled.section`
-  display: flex;
-  flex-wrap: wrap;
-  `
-
-const StyledDiv = styled.div`
-    width: 220px;
-    height: 330px;
-    position: relative;
-
-  &:hover {
-    
-    /* Show the text overlay when hovering parent */
-    div {
-      opacity: 1;
-      background: rgba(0,0,0,0.6);  /* semi-transparent overlay */
-    }
-  }
+const MoviesGrid = styled.section`
+  display: grid;
+  background: black;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 `
-const StyledText = styled.div`
+
+const ImageWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  height: auto;
+  padding-bottom: 150%;
+`
+
+const Poster = styled.img`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  `
+const Overlay = styled.div`
+  position: absolute;
+  inset: 0;
+  color: #fff;
+  opacity: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  position: absolute;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 1rem;
-  color: white;
-  opacity: 0;                   /* hidden by default */
+  padding: 15px;
   transition: opacity 0.25s ease;
+`
+const MovieCard = styled.article`
+  position: relative;
+  overflow: hidden;
+  
+    &:hover ${Overlay} {
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 1;}
 `
