@@ -54,12 +54,10 @@ const ImageWrapper = styled.div`
   position: relative;
   width: 100%;
   aspect-ratio: 2 / 3;
-  overflow: hidden;
 `
 
 const Poster = styled.img`
   position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -78,7 +76,6 @@ const Overlay = styled.div`
 `
 const MovieCard = styled.article`
   position: relative;
-  overflow: hidden;
   
     &:hover ${Overlay} {
   background: rgba(0, 0, 0, 0.6);

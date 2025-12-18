@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
-import Home from './Home'
 import { Link } from 'react-router'
 import styled from "styled-components"
-// import { MovieCard } from '../Components/MovieCard'
+import { StarIcon, ArrowIcon } from '../Components/Icons'
 
 const apiKey = '1126aa859065d4eba48bcfccb414407a'
 const imageBase = 'https://image.tmdb.org/t/p/w1280'
@@ -20,7 +19,7 @@ export const Movie = () => {
       const OneMovieData = await response.json()
       setMovie(OneMovieData)
 
-      // console.log('a movie', OneMovieData)
+      console.log('a movie', OneMovieData)
 
     }
 
@@ -37,16 +36,18 @@ export const Movie = () => {
       minHeight: '100vh'
     }}
     >
-      <Link to={`/`}>Movies</Link>
-      <StyledContainer>
+      <StyledLink to={`/`}><ArrowIcon /><P>Movies</P></StyledLink>
 
+      <StyledContainer>
         <StyledImage src={`${imageBase}${movie.poster_path}`} />
 
-        <div>
-          <StyledH1>{movie.title}</StyledH1>
-          <StyledP>{movie.vote_average}</StyledP>
-          <StyledP>{movie.overview}</StyledP>
-        </div>
+        <StyledTextContainer>
+          <StyledTitleContainer>
+            <H1><span>{movie.title}</span><StyledSpan><StarIcon />{movie.vote_average}</StyledSpan></H1>
+          </StyledTitleContainer>
+
+          <P>{movie.overview}</P>
+        </StyledTextContainer>
 
       </StyledContainer>
     </section>
@@ -56,16 +57,48 @@ export const Movie = () => {
 const StyledImage = styled.img`
   border: 5px solid white;
   max-width: 400px;
+  width: 100%;
 `
-const StyledH1 = styled.h1`
+const H1 = styled.h1`
   color: white;
+  margin-bottom: 20px;
 `
-const StyledP = styled.p`
+const P = styled.p`
   color: white;
 `
 const StyledContainer = styled.div`
   display: flex;
-  margin: 50px;
+  height: 90vh;
+  justify-content: flex-start; 
+  align-items: flex-end; 
+  padding: 50px;
   gap: 20px;
-`
 
+  @media (max-width: 800px) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+`
+const StyledTextContainer = styled.div`
+  max-width: 500px;
+`
+const StyledSpan = styled.span`
+  background-color: white;
+  color: black;
+  font-size: 30px;
+  margin: 5px;
+  padding: 5px;
+  `
+const StyledTitleContainer = styled.div`
+  display: flex;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+  }
+  `
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  display: flex;
+  padding: 50px;
+`
