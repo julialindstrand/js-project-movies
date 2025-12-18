@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { Link } from 'react-router'
 import styled from "styled-components"
-import { StarIcon, ArrowIcon } from '../Components/blabla'
+import { StarIcon, ArrowIcon } from '../Components/Icons'
 
 const apiKey = '1126aa859065d4eba48bcfccb414407a'
 
