@@ -53,16 +53,18 @@ const MoviesGrid = styled.section`
 const ImageWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: auto;
-  padding-bottom: 150%;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
 `
 
 const Poster = styled.img`
   position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  `
+`
+
 const Overlay = styled.div`
   position: absolute;
   inset: 0;
