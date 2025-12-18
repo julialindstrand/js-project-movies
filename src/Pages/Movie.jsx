@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { Link } from 'react-router'
 import styled from "styled-components"
-import { StarIcon, ArrowIcon } from '../Components/Icons'
+import { StarIcon, ArrowIcon } from '../Components/blabla'
 
 const apiKey = '1126aa859065d4eba48bcfccb414407a'
-const imageBase = 'https://image.tmdb.org/t/p/w1280'
 
 export const Movie = () => {
   const [movie, setMovie] = useState('')
@@ -30,7 +29,7 @@ export const Movie = () => {
 
   return (
     <section style={{
-      backgroundImage: `url(${imageBase}${movie.backdrop_path})`,
+      backgroundImage: `url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       minHeight: '100vh'
@@ -39,7 +38,8 @@ export const Movie = () => {
       <StyledLink to={`/`}><ArrowIcon /><P>Movies</P></StyledLink>
 
       <StyledContainer>
-        <StyledImage src={`${imageBase}${movie.poster_path}`} />
+        <StyledImage src={`https://image.tmdb.org/t/p/w780${movie.poster_path}`}
+          alt={movie.title} />
 
         <StyledTextContainer>
           <StyledTitleContainer>
@@ -84,11 +84,12 @@ const StyledTextContainer = styled.div`
   max-width: 500px;
 `
 const StyledSpan = styled.span`
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.75);
   color: black;
   font-size: 30px;
   margin: 5px;
   padding: 5px;
+  border-radius: 10px;
   `
 const StyledTitleContainer = styled.div`
   display: flex;
@@ -101,4 +102,8 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   display: flex;
   padding: 50px;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.6);
+  }
 `
