@@ -65,7 +65,6 @@ const StyledImage = styled.img`
 const H1 = styled.h1`
   color: white;
   margin-bottom: 20px;
-
 `
 
 const H2 = styled.h2`
@@ -77,9 +76,9 @@ const P = styled.p`
 `
 const StyledContainer = styled.div`
   display: flex;
-  height: 90vh;
   justify-content: flex-start; 
   align-items: flex-end; 
+  margin-top: 15%;
   padding: 50px;
   gap: 20px;
 
