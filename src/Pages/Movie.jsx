@@ -29,28 +29,31 @@ export const Movie = () => {
 
   return (
     <section style={{
-      backgroundImage: `url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
+      backgroundImage: `
+        linear-gradient(
+        rgba(0, 0, 0, 0.6)
+      ), url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
-      minHeight: '100vh'
+      minHeight: '100vh',
+
     }}
     >
-      <StyledLink to={`/`}><ArrowIcon /><P>Movies</P></StyledLink>
+      <StyledLink to={`/`}><ArrowIcon /><H2>Movies</H2></StyledLink>
 
       <StyledContainer>
         <StyledImage src={`https://image.tmdb.org/t/p/w780${movie.poster_path}`}
-          alt={movie.title} />
+          alt={`Movie poster of the movie: ${movie.title}`} />
 
         <StyledTextContainer>
           <StyledTitleContainer>
-            <H1><span>{movie.title}</span><StyledSpan><StarIcon />{movie.vote_average}</StyledSpan></H1>
+            <H1>{movie.title} <StyledSpan><StarIcon /> {movie.vote_average}</StyledSpan></H1>
           </StyledTitleContainer>
-
           <P>{movie.overview}</P>
         </StyledTextContainer>
 
       </StyledContainer>
-    </section>
+    </section >
   )
 }
 
@@ -62,7 +65,13 @@ const StyledImage = styled.img`
 const H1 = styled.h1`
   color: white;
   margin-bottom: 20px;
+
 `
+
+const H2 = styled.h2`
+  color: white;
+`
+
 const P = styled.p`
   color: white;
 `
@@ -86,10 +95,10 @@ const StyledTextContainer = styled.div`
 const StyledSpan = styled.span`
   background-color: rgba(255, 255, 255, 0.75);
   color: black;
-  font-size: 30px;
   margin: 5px;
   padding: 5px;
   border-radius: 10px;
+  font-size: 20px;
   `
 const StyledTitleContainer = styled.div`
   display: flex;
