@@ -28,10 +28,10 @@ export const Home = () => {
             <ImageWrapper>
               <Poster
                 src={`https://image.tmdb.org/t/p/w780${movie.poster_path}`}
-                alt={movie.title}
+                alt={`Movie poster of the movie: ${movie.title}`}
               />
               <Overlay>
-                <h1>{movie.title}</h1>
+                <H1>{movie.title}</H1>
                 <p>Released {movie.release_date}</p>
               </Overlay>
             </ImageWrapper>
@@ -78,6 +78,10 @@ const MovieCard = styled.article`
   position: relative;
   
     &:hover ${Overlay} {
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.8);
   opacity: 1;}
+`
+
+const H1 = styled.h1`
+  font-size: 50px;
 `
