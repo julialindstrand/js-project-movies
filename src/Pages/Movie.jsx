@@ -78,7 +78,7 @@ const StyledContainer = styled.div`
   display: flex;
   justify-content: flex-start; 
   align-items: flex-end; 
-  margin-top: 15%;
+  min-height: 85vh;
   padding: 50px;
   gap: 20px;
 
